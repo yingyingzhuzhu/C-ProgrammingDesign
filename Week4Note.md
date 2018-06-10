@@ -99,3 +99,38 @@ String & operator = (const String & s) {
 	return * this;
 }
 ```
+
+## 第二课---运算符重载为友元函数
+
+通常，将运算符重载为类的成员函数，重载为友元函数的情况:
+
+• 成员函数不能满足使用要求
+
+• 普通函数，又不能访问类的私有成员
+
+```cpp
+class Complex{
+	double real, imag;
+public:
+	Complex(double r, double i):real(r), imag(i){ };
+	Complex operator+(double r);
+};
+Complex Complex::operator+(double r){ //能解释c+5，但是不能解释5+c
+	return Complex(real + r, imag);
+}
+
+Complex operator+ (double r, const Complex & c) {
+//能解释 5+c，但是普通函数不能访问私有成员c.real, c.imag
+	return Complex( c.real + r, c.imag);
+}
+
+// 只能将运算符+重载为友元函数
+class Complex {
+	double real, imag;
+public:
+	Complex( double r, double i):real(r),imag(i){ };
+	Complex operator+( double r );
+	friend Complex operator + (double r, const Complex & c);
+};
+
+```
