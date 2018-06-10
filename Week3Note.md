@@ -327,5 +327,110 @@ step 2： 执行__封闭类__的构造函数
 
 先生成的后析构
 
-## 第四课---友元
+
+## 第四课---友元Friend
+
+__友元函数__
+
+一个类的友元函数可以访问该类的私有成员。
+
+__友元类__
+
+A是B的友元类 -> A的成员函数可以访问B的私有成员。
+
+不能传递，不能继承
+
+```cpp
+class CCar{
+	private:
+		int price;
+	friend class CDriver; // 声明CDriver为友元类
+};
+
+class CDriver{
+	public:
+		CCar myCar;
+		void ModifyCar(){
+			myCar.price += 1000; // CDriver是CCar的友元类，可以访问其私有成员price
+		}
+};
+```
+
+## 第四课---this指针
+
+```cpp
+class A{
+    int i;
+public:
+    void printHello(){
+        cout<<"hello"<<endl;
+    }
+    void printiHello(){
+        cout<<i<<"hello"<<endl;
+    }
+};
+int main() {
+    A * p = NULL; // 空指针，this为NULL
+    p->printHello(); // output: hello
+    p->printiHello(); // Error
+    return 0;
+}
+```
+
+__this指针与静态成员函数__：
+
+不能使用this指针，因为静态成员函数并不具体作用于某个对象。
+
+
+## 常量对象、常量成员函数和常引用
+
+__关键字：const__
+
+__常量成员函数：__
+
+```cpp
+class Sample{
+public:
+	int value;
+	void GetValue() const; // 常量成员函数
+	void func(){};
+};
+void Sample::GetValue() const{
+	value=0; // error，不能修改成员变量的值
+	func(); // error，不能调用非常量成员函数
+}
+```
+
+
+__常量对象：__
+
+```cpp
+int main(){
+	const Sample o; // 常量对象
+	o.vlaue = 100; // error, 常量对象不可被修改
+	o.func(); // error, 常量对象上面不能执行非常量成员函数
+	o.GetValue(); // ok, 常量对象上可以执行常量成员函数
+	return 0;
+}
+```
+
+__常量成员函数的重载:__
+
+两个成员函数，名字和参数表都一样，但是一个是const，一个不是，算重载。
+
+__常引用：__
+
+引用前面可以加const关键字，成为常引用。不能通过常引用，修改其引用的变量。
+
+优点：对象作为函数的参数时，生成该参数需要调用复制构造函数，效率比较低。用指针作参数，代码又不好看。
+
+```cpp
+class Sample {
+…
+};
+void PrintfObj(const Sample & o)
+{
+……
+} 
+```
 
