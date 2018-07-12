@@ -83,10 +83,10 @@ class Complex {
 };
 
 Complex c1; // error, 缺少构造函数的参数
-Complex * pc = new Complex; // error, 没有参数
+Complex* pc = new Complex; // error, 没有参数
 Complex c1(2); // OK, 不同于Java，不一定要new一个对象
 Complex c1(1,4), c2(3,5); // OK
-Complex * pc = new Complex(3,4); // OK
+Complex* pc = new Complex(3,4); // OK
 ```
 
 对象生成时调用构造函数。
@@ -107,7 +107,7 @@ class Test{
 
 Test array1[3]={1, Test(1,2)}; // 三个元素分别用(1)(2)(3)初始化。不用new Test(1,2)？
 Test array2[3]={Test(2,3),Test(1,2),1}; // 三个元素分别用(2)(2)(1)
-Test * pArray[3]={new Test(4),new Test(1,2)};// 前两个元素分别用(1)(2)初始化。与array1[3]不同，pArray是指针数组，不必须初始化对象！
+Test* pArray[3]={new Test(4),new Test(1,2)};// 前两个元素分别用(1)(2)初始化。与array1[3]不同，pArray是指针数组，不必须初始化对象！
 
 ```
 
@@ -200,7 +200,7 @@ __析构函数和运算符delete__
 delete运算导致析构函数调用
 
 ```cpp
-Ctest * pTest;
+Ctest* pTest;
 pTest = new Ctest; // 构造函数被调用
 delete pTest; // 析构函数被调用
 ```
@@ -266,12 +266,12 @@ CRectangle r; r.PrintTotal();
 ```
 (3)指针->成员名
 ```cpp
-CRectangle * p = &r; p->PrintTotal();
+CRectangle* p = &r; p->PrintTotal();
 ```
 
 (4)引用.成员名
 ```cpp
-CRectangle & ref = r; int n=ref.nTotalNumber;
+CRectangle& ref = r; int n=ref.nTotalNumber;
 ```
 
 Attention: 在静态成员函数中，不能访问非静态成员变量，也不能调用非静态成员函数。
@@ -370,7 +370,7 @@ public:
     }
 };
 int main() {
-    A * p = NULL; // 空指针，this为NULL
+    A* p = NULL; // 空指针，this为NULL
     p->printHello(); // output: hello
     p->printiHello(); // Error
     return 0;
@@ -428,7 +428,7 @@ __常引用：__
 class Sample {
 …
 };
-void PrintfObj(const Sample & o)
+void PrintfObj(const Sample& o)
 {
 ……
 } 
